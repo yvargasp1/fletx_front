@@ -8,6 +8,8 @@ import { ListProductsComponent } from './components/dashboard/dashboard-products
 import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarModule } from 'primeng/sidebar';
+import { CategoryService } from './services/category/category.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,12 @@ import { SidebarModule } from 'primeng/sidebar';
   ],
   imports: [
     DropdownModule,
-    BrowserAnimationsModule,BrowserModule,
+    BrowserAnimationsModule,BrowserModule,HttpClientModule,
     AppRoutingModule,
     SidebarModule,
     InputNumberModule,
   ],
-  providers: [],
+  providers: [CategoryService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
