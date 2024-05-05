@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+p-dropdown {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border-width: 2px;
+ width: 100%;
+
+}
+
+p-dropdown .p-dropdown.p-component.p-inputwrapper{
+ box-shadow: none !important;
+ display: flex;
+ width: 100%;
+}

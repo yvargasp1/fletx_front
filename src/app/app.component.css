@@ -1,0 +1,56 @@
+
+:host ::ng-deep p-inputnumber,
+.p-inputnumber {
+    display: grid;
+    font-family: 'Lato';
+    --tw-border-opacity: 1;
+    border-color: rgb(115 115 115 / var(--tw-border-opacity));
+    border-width: 1px;
+    border-radius: 0.5rem;
+    height: 50px;
+    padding-top: 5px;
+    padding-bottom:5px ;
+    padding-left:16px ;
+    padding-right:16px ;
+    width: 100%;
+}
+
+:host ::ng-deep p-calendar,
+.p-inputnumber {
+    display: grid;
+    font-family: 'Lato';
+    --tw-border-opacity: 1;
+    border-color: rgb(115 115 115 / var(--tw-border-opacity));
+    border-width: 1px;
+    border-radius: 0.5rem;
+    height: 50px;
+    padding-top: 5px;
+    padding-bottom:5px ;
+    padding-left:16px ;
+    padding-right:16px ;
+    width: 100%;
+}
+
+:host ::ng-deep .p-inputtext,
+:host ::ng-deep .p-inputtext:focus:enabled,
+:host ::ng-deep .p-inputtext:hover {
+    display: grid;
+    border: none;
+    box-shadow: none;
+    font-family: 'Lato';
+    color: #191C1D;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap: break-word;
+    letter-spacing: 0.50px;
+    width: 100%;
+}
+
+:host ::ng-deep .p-inputtext:focus:enabled {
+    box-shadow: none;
+}
+:host ::ng-deep span,.p-inputnumber.p-component{
+    display: grid;
+}
+
