@@ -229,7 +229,6 @@
   <ng-template pTemplate="header">
     <div class="inline-flex items-center gap-4">
       <svg
-
         (click)="onMenu()"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -246,7 +245,7 @@
       </svg>
 
       <div class="text-lg font-sans font-bold leading-normal text-zinc-950">
-        Productos
+        Menú
       </div>
     </div>
   </ng-template>
@@ -254,6 +253,7 @@
   <ng-template pTemplate="content">
     <div class="flex flex-col gap-4">
       <div
+        (click)="onCategory()"
         class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] flex-col items-center inline-flex"
       >
         <div
@@ -262,7 +262,8 @@
           Crear categoría
         </div>
       </div>
-       <div
+      <div
+        (click)="onProduct()"
         class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] flex-col items-center inline-flex"
       >
         <div
@@ -274,3 +275,471 @@
     </div>
   </ng-template>
 </p-sidebar>
+
+<p-sidebar [visible]="formVisibleCategory" [showCloseIcon]="false">
+  <ng-template pTemplate="header">
+    <div class="inline-flex items-center gap-4">
+      <svg
+        (click)="onCategory()"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6 cursor-pointer"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+        />
+      </svg>
+
+      <div class="text-lg font-sans font-bold leading-normal text-zinc-950">
+        Categoría
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <form [formGroup]="formCategory">
+      <div class="grid grid-cols-1 gap-4 w-[100%]">
+        <div class="flex flex-col gap-2">
+          <label class="text-zinc-500 font-sans" for="username">Nombre</label>
+          <input pInputText id="name" formControlName="name" />
+          <div
+            *ngIf="
+              formCategory.get('name')?.invalid &&
+              (formCategory.get('name')?.dirty ||
+                formCategory.get('name')?.touched)
+            "
+          >
+            <div
+              *ngIf="formCategory.get('name')?.errors?.['required']  "
+              class="p-1 font-['Lato'] text-xs text-red-500"
+            >
+              Campo obligatorio
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-zinc-500 font-sans" for="username"
+            >Descripción</label
+          >
+          <input pInputText id="description" formControlName="description" />
+          <div
+            *ngIf="
+              formCategory.get('description')?.invalid &&
+              (formCategory.get('description')?.dirty ||
+                formCategory.get('description')?.touched)
+            "
+          >
+            <div
+              *ngIf="formCategory.get('description')?.errors?.['required']  "
+              class="p-1 font-['Lato'] text-xs text-red-500"
+            >
+              Campo obligatorio
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div class="grid">
+      <div
+        class="lg:inline-flex justify-end gap-4 items-center grid grid-cols-1"
+      >
+        <div
+          *ngIf="formCategory.valid"
+          (click)="saveCategory()"
+          class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] flex-col items-center inline-flex"
+        >
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-zinc-950"
+          >
+            Crear categoría
+          </div>
+        </div>
+        <div
+          *ngIf="!formCategory.valid"
+          class="rounded-lg border-zinc-300 bg-zinc-300 p-4 border-[2px] flex-col items-center inline-flex"
+        >
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-zinc-400"
+          >
+            Crear categoría
+          </div>
+        </div>
+        <div
+          (click)="onCategory()"
+          class="cursor-pointer rounded-lg border-red-500 p-4 border-[2px] flex-col items-center inline-flex"
+        >
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-red-500"
+          >
+            Cancelar
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-sidebar>
+<p-sidebar [visible]="formVisibleProduct" [showCloseIcon]="false">
+  <ng-template pTemplate="header">
+    <div class="inline-flex items-center gap-4">
+      <svg
+        (click)="onProduct()"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6 cursor-pointer"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+        />
+      </svg>
+
+      <div class="text-lg font-sans font-bold leading-normal text-zinc-950">
+        Producto
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <form [formGroup]="formProduct">
+      <div class="grid grid-cols-1 gap-4 w-[100%]">
+        <div class="flex flex-col gap-2">
+          <label class="text-zinc-500 font-sans" for="username">Nombre</label>
+          <input pInputText id="name" formControlName="name" />
+          <div
+            *ngIf="
+              formProduct.get('name')?.invalid &&
+              (formProduct.get('name')?.dirty ||
+                formProduct.get('name')?.touched)
+            "
+          >
+            <div
+              *ngIf="formProduct.get('name')?.errors?.['required']  "
+              class="p-1 font-['Lato'] text-xs text-red-500"
+            >
+              Campo obligatorio
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="text-zinc-500 font-sans" for="date_created"
+            >Fecha</label
+          >
+          <p-calendar
+            formControlName="date_created"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            inputId="icondisplay"
+          />
+          <div
+            *ngIf="
+              formProduct.get('date_created')?.invalid &&
+              (formProduct.get('date_created')?.dirty ||
+                formProduct.get('date_created')?.touched)
+            "
+          >
+            <div
+              *ngIf="formProduct.get('date_created')?.errors?.['required']  "
+              class="p-1 font-['Lato'] text-xs text-red-500"
+            >
+              Campo obligatorio
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-zinc-500 font-sans" for="price">Precio</label>
+          <p-inputNumber
+            [prefix]="'COP '"
+            pInputText
+            id="price"
+            [minFractionDigits]="2"
+            [maxFractionDigits]="2"
+            [min]="0"
+            formControlName="price"
+          />
+          <div
+            *ngIf="
+              formProduct.get('price')?.invalid &&
+              (formProduct.get('price')?.dirty ||
+                formProduct.get('price')?.touched)
+            "
+          >
+            <div
+              *ngIf="formProduct.get('price')?.errors?.['required']  "
+              class="p-1 font-['Lato'] text-xs text-red-500"
+            >
+              Campo obligatorio
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-zinc-500 font-sans" for="value">Descripción</label>
+          <input pInputText id="value" formControlName="value" />
+          <div
+            *ngIf="
+              formProduct.get('value')?.invalid &&
+              (formProduct.get('value')?.dirty ||
+                formProduct.get('value')?.touched)
+            "
+          >
+            <div
+              *ngIf="formProduct.get('value')?.errors?.['required']  "
+              class="p-1 font-['Lato'] text-xs text-red-500"
+            >
+              Campo obligatorio
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-zinc-500 font-sans" for="stock">Cantidad</label>
+          <p-inputNumber
+            pInputText
+            id="stock"
+            [min]="1"
+            formControlName="stock"
+          />
+          <div
+            *ngIf="
+              formProduct.get('stock')?.invalid &&
+              (formProduct.get('stock')?.dirty ||
+                formProduct.get('stock')?.touched)
+            "
+          >
+            <div
+              *ngIf="formProduct.get('stock')?.errors?.['required']  "
+              class="p-1 font-['Lato'] text-xs text-red-500"
+            >
+              Campo obligatorio
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-zinc-500 font-sans" for="type"
+            >Unidad de volumen</label
+          >
+          <input
+            pInputText
+            id="value"
+            formControlName="type"
+            placeholder="U.S Gal/3.78L"
+          />
+          <div
+            *ngIf="
+              formProduct.get('type')?.invalid &&
+              (formProduct.get('type')?.dirty ||
+                formProduct.get('type')?.touched)
+            "
+          >
+            <div
+              *ngIf="formProduct.get('type')?.errors?.['required']  "
+              class="p-1 font-['Lato'] text-xs text-red-500"
+            >
+              Campo obligatorio
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-zinc-500 font-sans" for="category_id"
+            >Categoría</label
+          >
+          <p-dropdown
+            optionLabel="name"
+            [options]="listCategories"
+            formControlName="category_id"
+            placeholder="Seleccionar"
+          />
+          <div
+            *ngIf="
+              formProduct.get('category_id')?.invalid &&
+              (formProduct.get('category_id')?.dirty ||
+                formProduct.get('category_id')?.touched)
+            "
+          >
+            <div
+              *ngIf="formProduct.get('category_id')?.errors?.['required']  "
+              class="p-1 font-['Lato'] text-xs text-red-500"
+            >
+              Campo obligatorio
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="!formProduct.get('file')?.value"
+          class="flex flex-col gap-2"
+        >
+          <label class="text-zinc-500 font-sans" for="category_id"
+            >Imagen</label
+          >
+
+          <input
+            type="file"
+            (change)="onUploadFile($event)"
+            accept="image/png, image/jpeg"
+            id="uploadImage"
+            class="hidden"
+          />
+          <label
+            for="uploadImage"
+            class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] items-center justify-center gap-4 inline-flex"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
+              />
+            </svg>
+
+            <div
+              class="italic text-xs font-sans font-medium leading-normal text-zinc-950"
+            >
+              Subir
+            </div>
+          </label>
+          <div *ngIf="errorFile" class="p-1 font-['Lato'] text-xs text-red-500">
+            Formato erroneo {{ errorFile.name }}
+          </div>
+        </div>
+        <div *ngIf="formProduct.get('file')?.value" class="flex flex-col gap-2">
+           <label class="text-zinc-500 font-sans" for="category_id"
+            >Imagen</label>
+            <div
+             
+              class="rounded-lg border-zinc-950 p-4 border-[2px] inline-flex items-center justify-center gap-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                />
+              </svg>
+    
+              <label class="text-zinc-500 font-sans" for="file">{{
+                file.name
+              }}</label>
+              <svg class="cursor-pointer"
+               (click) ="onDeleteFile()"
+                width="17"
+                height="17"
+                viewBox="0 0 17 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_183_167)">
+                  <path
+                    d="M3.51104 4.85266H13.7886"
+                    stroke="#FF3C3A"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M7.36514 7.55853V11.6174"
+                    stroke="#FF3C3A"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9.93454 7.55853V11.6174"
+                    stroke="#FF3C3A"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M4.15339 4.85266L4.79574 12.9703C4.79574 13.3291 4.93109 13.6733 5.17202 13.927C5.41295 14.1807 5.73972 14.3232 6.08044 14.3232H11.2192C11.56 14.3232 11.8867 14.1807 12.1277 13.927C12.3686 13.6733 12.5039 13.3291 12.5039 12.9703L13.1463 4.85266"
+                    stroke="#FF3C3A"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M6.72279 4.85267V2.82326C6.72279 2.64385 6.79047 2.47179 6.91093 2.34492C7.0314 2.21806 7.19478 2.14679 7.36514 2.14679H9.93454C10.1049 2.14679 10.2683 2.21806 10.3888 2.34492C10.5092 2.47179 10.5769 2.64385 10.5769 2.82326V4.85267"
+                    stroke="#FF3C3A"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_183_167">
+                    <rect
+                      width="15.4164"
+                      height="16.2353"
+                      fill="white"
+                      transform="translate(0.941641 0.117371)"
+                    />
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div class="grid">
+      <div
+        class="lg:inline-flex justify-end gap-4 items-center grid grid-cols-1"
+      >
+        <div (click)="onSaveProduct()"
+          *ngIf="formProduct.valid"
+          class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] flex-col items-center inline-flex"
+        >
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-zinc-950"
+          >
+            Crear producto
+          </div>
+        </div>
+        <div
+          *ngIf="!formProduct.valid"
+          class="rounded-lg border-zinc-300 bg-zinc-300 p-4 border-[2px] flex-col items-center inline-flex"
+        >
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-zinc-400"
+          >
+            Crear producto
+          </div>
+        </div>
+        <div
+          class="cursor-pointer rounded-lg border-red-500 p-4 border-[2px] flex-col items-center inline-flex"
+        >
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-red-500"
+          >
+            Cancelar
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-sidebar>
+
+<p-toast />

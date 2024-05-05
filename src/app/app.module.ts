@@ -10,7 +10,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarModule } from 'primeng/sidebar';
 import { CategoryService } from './services/category/category.service';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { CalendarModule } from 'primeng/calendar';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore  } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import {provideStorage, getStorage} from '@angular/fire/storage'
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,12 +27,21 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     DropdownModule,
-    BrowserAnimationsModule,BrowserModule,HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     SidebarModule,
     InputNumberModule,
+    InputTextModule,
+    ToastModule,
+    CalendarModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()),
+    provideStorage(()=>getStorage())
   ],
-  providers: [CategoryService],
+  providers: [CategoryService, MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

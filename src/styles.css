@@ -4,18 +4,47 @@
 @tailwind components;
 @tailwind utilities;
 
-
 p-dropdown {
- display: flex;
- align-items: center;
- justify-content: center;
- border-width: 2px;
- width: 100%;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-width: 2px;
+  width: 100%;
+  border-radius: 6px;
 }
 
-p-dropdown .p-dropdown.p-component.p-inputwrapper{
- box-shadow: none !important;
- display: flex;
- width: 100%;
+p-dropdown .p-dropdown.p-component.p-inputwrapper {
+  box-shadow: none !important;
+  display: flex;
+  width: 100%;
+}
+
+p-calendar span {
+  width: 100%;
+}
+input.p-inputtext.p-component.p-element {
+  border-width: 2px;
+  box-shadow: none !important;
+  padding: 8px;
+}
+@media (min-width: 1024px) {
+  .p-sidebar-left {
+    width: 40%;
+  }
+}
+
+p-inputnumber span input.p-inputtext {
+  border-width: 0px;
+  box-shadow: none !important;
+  padding: 0;
+  width: 100%;
+}
+p-inputnumber {
+  display: grid;
+  padding: 0;
+  width: 100%;
+}
+.p-datepicker-title {
+  display: flex;
+  gap: 4px;
 }
