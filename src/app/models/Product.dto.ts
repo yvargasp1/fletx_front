@@ -2,10 +2,11 @@ export class Product {
   id!: number;
   date_created!: Date;
   name!: string;
-  category_id!: number;
+  category_id!: any;
   price!: number;
-  value!: number;
+  type!: string;
+  value!: string;
   stock!: number;
-  file!:any;
+  file!: any;
   image!: string;
 }

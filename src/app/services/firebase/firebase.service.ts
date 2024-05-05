@@ -1,37 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { HttpClient } from '@angular/common/http';
+
+import { Product } from '../../models/Product.dto';
+import { environment } from '../../../environments/environment';
 import {
   Storage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
 } from '@angular/fire/storage';
-
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
-  
-  constructor( private storage:Storage){
+  constructor(private storage: Storage) {}
+  public async saveImage(file: any): Promise<string> {
+    const imageRef = ref(this.storage, `images/${file.name}`);
+    const upload = uploadBytesResumable(imageRef, file);
 
-  }
-  addPhoto(photo: any) {
-
-    console.log('Upload');
-    const imageRef = ref(this.storage, `images/${photo.name}`);
-    const upload = uploadBytesResumable(imageRef, photo)
-    upload.on('state_changed',(snapshot)=>{
-      const progress = (snapshot.bytesTransferred/snapshot.totalBytes)
-      console.log(progress)
-    },
-    (error)=>{
-      console.log(error.message)
-    },
-    ()=>{
-      getDownloadURL(upload.snapshot.ref).then((downloadUrl)=>{
-        console.log(downloadUrl)
-      })
-    }
-  )
+    return new Promise<string>((resolve, reject) => {
+      upload.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = snapshot.bytesTransferred / snapshot.totalBytes;
+          console.log(progress);
+        },
+        (error) => {
+          console.log(error.message);
+          reject(error.message);
+        },
+        async () => {
+          try {
+            const downloadURL = await getDownloadURL(upload.snapshot.ref);
+            resolve(downloadURL);
+          } catch (error) {
+            console.log(error);
+            reject(error);
+          }
+        }
+      );
+    });
   }
 }
