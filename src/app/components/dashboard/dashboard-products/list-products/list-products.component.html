@@ -3,82 +3,251 @@
     <p-dropdown optionLabel="name" placeholder="Ver por" />
     <p-dropdown optionLabel="name" placeholder="Ordenar por" />
   </div>
-  <div class="flex flex-col gap-4 rounded-lg bg-gray-300 p-4">
-   <div class="grid">
-    <div class="inline-flex justify-between items-center">
-      <div class="text-lg font-sans font-bold leading-normal text-zinc-950">
-        Filtros
-      </div>
-      <div
-        class="cursor-pointer rounded-lg border-[2px] border-red-500 p-4 items-center inline-flex gap-4"
-      >
-        <svg
-          width="17"
-          height="17"
-          viewBox="0 0 17 17"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g clip-path="url(#clip0_158_168)">
-            <path
-              d="M3.51104 4.85266H13.7886"
-              stroke="#FF3C3A"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M7.36514 7.55853V11.6174"
-              stroke="#FF3C3A"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M9.93454 7.55853V11.6174"
-              stroke="#FF3C3A"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M4.15339 4.85266L4.79574 12.9703C4.79574 13.3291 4.93109 13.6733 5.17202 13.927C5.41295 14.1807 5.73972 14.3232 6.08044 14.3232H11.2192C11.56 14.3232 11.8867 14.1807 12.1277 13.927C12.3686 13.6733 12.5039 13.3291 12.5039 12.9703L13.1463 4.85266"
-              stroke="#FF3C3A"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M6.72279 4.85267V2.82326C6.72279 2.64385 6.79047 2.47179 6.91093 2.34492C7.0314 2.21806 7.19478 2.14679 7.36514 2.14679H9.93454C10.1049 2.14679 10.2683 2.21806 10.3888 2.34492C10.5092 2.47179 10.5769 2.64385 10.5769 2.82326V4.85267"
-              stroke="#FF3C3A"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_158_168">
-              <rect
-                width="15.4164"
-                height="16.2353"
-                fill="white"
-                transform="translate(0.941641 0.117371)"
-              />
-            </clipPath>
-          </defs>
-        </svg>
-
+  <div class="flex flex-col gap-4 rounded-lg bg-zinc-100 p-4">
+    <div class="grid">
+      <div class="inline-flex justify-between items-center">
+        <div class="text-lg font-sans font-bold leading-normal text-zinc-950">
+          Filtros
+        </div>
         <div
-          class="italic text-xs font-sans font-medium leading-normal text-red-500"
+          class="cursor-pointer rounded-lg border-[2px] border-red-500 p-4 items-center inline-flex gap-4"
         >
-          Borrar filtros
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 17 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_158_168)">
+              <path
+                d="M3.51104 4.85266H13.7886"
+                stroke="#FF3C3A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M7.36514 7.55853V11.6174"
+                stroke="#FF3C3A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9.93454 7.55853V11.6174"
+                stroke="#FF3C3A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M4.15339 4.85266L4.79574 12.9703C4.79574 13.3291 4.93109 13.6733 5.17202 13.927C5.41295 14.1807 5.73972 14.3232 6.08044 14.3232H11.2192C11.56 14.3232 11.8867 14.1807 12.1277 13.927C12.3686 13.6733 12.5039 13.3291 12.5039 12.9703L13.1463 4.85266"
+                stroke="#FF3C3A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6.72279 4.85267V2.82326C6.72279 2.64385 6.79047 2.47179 6.91093 2.34492C7.0314 2.21806 7.19478 2.14679 7.36514 2.14679H9.93454C10.1049 2.14679 10.2683 2.21806 10.3888 2.34492C10.5092 2.47179 10.5769 2.64385 10.5769 2.82326V4.85267"
+                stroke="#FF3C3A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_158_168">
+                <rect
+                  width="15.4164"
+                  height="16.2353"
+                  fill="white"
+                  transform="translate(0.941641 0.117371)"
+                />
+              </clipPath>
+            </defs>
+          </svg>
+
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-red-500"
+          >
+            Borrar filtros
+          </div>
         </div>
       </div>
     </div>
-   </div>
-   <div class="text-lg font-sans font-bold leading-normal text-zinc-500">
-        Categorias
+    <div class="text-lg font-sans font-bold leading-normal text-zinc-500">
+      Categorias
+    </div>
+  </div>
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <ng-container *ngFor="let item of listProducts">
+      <div class="flex flex-col gap-4 rounded-lg border-2 p-4">
+        <div class="grid w-[100%]">
+          <div >
+                <div class="flex justify-end items-start">
+                <div
+                  class="cursor-pointer p-2 bg-zinc-100 border border-zinc-100 rounded-lg"
+                >
+                  <svg
+                    width="25"
+                    height="26"
+                    viewBox="0 0 25 26"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_4_1373)">
+                      <path
+                        d="M12.0645 15.1414C13.169 15.1414 14.0645 14.2119 14.0645 13.0653C14.0645 11.9187 13.169 10.9892 12.0645 10.9892C10.9599 10.9892 10.0645 11.9187 10.0645 13.0653C10.0645 14.2119 10.9599 15.1414 12.0645 15.1414Z"
+                        stroke="#0C142E"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M22.0645 13.0653C19.3975 17.9098 16.0645 20.3316 12.0645 20.3316C8.06445 20.3316 4.73145 17.9098 2.06445 13.0653C4.73145 8.22074 8.06445 5.79899 12.0645 5.79899C16.0645 5.79899 19.3975 8.22074 22.0645 13.0653Z"
+                        stroke="#0C142E"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_4_1373">
+                        <rect
+                          width="24"
+                          height="24.9131"
+                          fill="white"
+                          transform="translate(0.0644531 0.608772)"
+                        />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+             <div class="flex justify-center">
+                <img
+                  [src]="item.image"
+                  alt=""
+                  class="h-[165px] rounded-lg"
+                />
+              </div>
+          </div>
+
+        </div>
+        <div class="justify-center flex">
+
+          <div class="flex flex-col gap-2">
+            <div class="text-xl font-extrabold font-sans italic text-zinc-950">
+              {{ item.name }}
+            </div>
+            <div class="text-lg font-normal font-sans text-zinc-950">
+              Cantidad: {{ item.stock }} {{ item.type }}
+            </div>
+            <div class="text-base font-normal font-sans text-zinc-950">
+              {{ item.value }}
+            </div>
+            <div
+              class="text-xl text-center font-extrabold font-sans text-red-500"
+            >
+              $ {{ item.price }}
+            </div>
+          </div>
+        </div>
+         
+
+              <div class="justify-center inline-flex gap-4 w-[100%]">
+                <div class="cursor-pointer bg-red-500 p-3 border-red-500 rounded-lg">
+                  <svg
+                    width="25"
+                    height="26"
+                    viewBox="0 0 25 26"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_4_1363)">
+                      <path
+                        d="M20.007 14.3002L12.6083 22.0108L5.2097 14.3002C4.72169 13.8005 4.33729 13.1999 4.08071 12.5362C3.82413 11.8725 3.70093 11.1601 3.71886 10.4438C3.73679 9.72757 3.89546 9.02297 4.18489 8.3744C4.47432 7.72583 4.88824 7.14735 5.40057 6.67537C5.9129 6.2034 6.51256 5.84817 7.16177 5.63204C7.81098 5.41591 8.49569 5.34357 9.17278 5.41957C9.84987 5.49557 10.5047 5.71827 11.0959 6.07365C11.6872 6.42902 12.2022 6.90937 12.6083 7.48445C13.0163 6.91355 13.5318 6.43739 14.1227 6.08579C14.7136 5.73419 15.3671 5.51471 16.0422 5.44108C16.7174 5.36745 17.3998 5.44126 18.0466 5.6579C18.6935 5.87453 19.2908 6.22932 19.8014 6.70006C20.3119 7.17081 20.7246 7.74737 21.0136 8.39366C21.3027 9.03996 21.4618 9.74207 21.4811 10.4561C21.5004 11.1701 21.3795 11.8806 21.1258 12.5431C20.8722 13.2056 20.4913 13.8059 20.007 14.3065"
+                        stroke="#F8F8F8"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_4_1363">
+                        <rect
+                          width="23.6757"
+                          height="24.9131"
+                          fill="white"
+                          transform="translate(0.770508 0.211914)"
+                        />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+                <div
+                  class="cursor-pointer inline-flex items-center gap-2 bg-red-500 p-3 border-red-500 rounded-lg"
+                >
+                <div
+                    class="text-lg  font-medium font-sans text-white"
+                  >
+                    Agregar
+                  </div>
+                  <svg
+                    width="27"
+                    height="26"
+                    viewBox="0 0 27 26"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_4_1367)">
+                      <path
+                        d="M6.52329 22.0109C7.7242 22.0109 8.69772 21.0814 8.69772 19.9348C8.69772 18.7882 7.7242 17.8587 6.52329 17.8587C5.32239 17.8587 4.34886 18.7882 4.34886 19.9348C4.34886 21.0814 5.32239 22.0109 6.52329 22.0109Z"
+                        stroke="#F8F8F8"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M18.4827 22.0109C19.6836 22.0109 20.6571 21.0814 20.6571 19.9348C20.6571 18.7882 19.6836 17.8587 18.4827 17.8587C17.2818 17.8587 16.3082 18.7882 16.3082 19.9348C16.3082 21.0814 17.2818 22.0109 18.4827 22.0109Z"
+                        stroke="#F8F8F8"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M18.4827 17.8587H6.52329V3.32611H4.34886"
+                        stroke="#F8F8F8"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M6.52329 5.40219L21.7443 6.44024L20.6571 13.7065H6.52329"
+                        stroke="#F8F8F8"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_4_1367">
+                        <rect
+                          width="26.0932"
+                          height="24.9131"
+                          fill="white"
+                          transform="translate(0 0.211975)"
+                        />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  
+                </div>
+              </div>
+            
       </div>
+    </ng-container>
   </div>
   <div></div>
   <div></div>
