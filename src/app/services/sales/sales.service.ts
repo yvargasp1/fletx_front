@@ -16,4 +16,7 @@ export class SalesService {
   public getAll() {
     return this.http.get<any>(`${this.URL}/sales`);
   }
+  public deleteSale(id: any) {
+    return this.http.delete<Sale>(`${this.URL}/sales/${id}`);
+  }
 }

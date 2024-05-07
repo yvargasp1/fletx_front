@@ -13,7 +13,7 @@ export class ProductService {
   public saveProduct(data: Product) {
     return this.http.post<Product>(`${this.URL}/products`, data);
   }
-  public editProduct(id:any ,data: Product) {
+  public editProduct(id: any, data: Product) {
     return this.http.patch<Product>(`${this.URL}/products/${id}`, data);
   }
 
@@ -35,5 +35,8 @@ export class ProductService {
       params = params.set('order', order);
     }
     return this.http.get<any>(`${this.URL}/products`, { params });
+  }
+  public deleteProduct(id: any) {
+    return this.http.delete<Product>(`${this.URL}/products/${id}`);
   }
 }

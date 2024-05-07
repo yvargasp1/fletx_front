@@ -114,12 +114,12 @@ export class ListProductsComponent implements OnInit {
         },
       });
   }
-  deleteFilters(){
+  deleteFilters() {
     this.ngOnInit();
-    this.selectOrder  = {
-    value: 'id',
-    order: 'ASC',
-  };
+    this.selectOrder = {
+      value: 'id',
+      order: 'ASC',
+    };
   }
   ngOnInit(): void {
     this.categoryService.getAll().subscribe({
@@ -198,5 +198,38 @@ export class ListProductsComponent implements OnInit {
   }
   onEdit(item: any) {
     this.eventEdit.emit(item);
+  }
+  onDeleteProduct(id:number){
+    this.productService.deleteProduct(id).subscribe({
+      next :(value:any)=> {
+        console.log(value)
+        if ((value.status = 302 && value.response)) {
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Producto',
+            key: 'product',
+            detail: `Esta relacionado a una venta.`,
+          });
+        }
+        if (value.affected) {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Producto',
+            key: 'product',
+            detail: `Eliminado`,
+          });
+          this.ngOnInit();
+        }
+      },
+      error:(err)=> {
+        console.log(err)
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Producto',
+            key: 'product',
+            detail: `Eliminado`,
+          });
+      },
+    })
   }
 }

@@ -381,10 +381,31 @@ export class DashboardProductsComponent implements OnInit {
   }
   saleProducts() {
     this.visibleDialog = true;
-    console.log(this.visibleDialog)
+    console.log(this.visibleDialog);
   }
   cancelSale() {
     this.visibleDialog = false;
+  }
+  onDeleteSale(id:number){
+    this.saleService.deleteSale(id).subscribe({
+      next :(value)=> {
+        this.messageService.add({
+          severity: 'success',
+          key: 'dash',
+          summary: 'Venta',
+          detail: `Eliminada con éxito.`,
+        });
+        this.ngOnInit()
+      },
+      error:(err)=> {
+          this.messageService.add({
+            severity: 'error',
+            key: 'dash',
+            summary: 'Venta',
+            detail: `Error.`,
+          });
+      },
+    })
   }
   onSaleProducts() {
     const sales: Sale[] = [];
@@ -433,5 +454,4 @@ export class DashboardProductsComponent implements OnInit {
       });
     }
   }
- 
 }
