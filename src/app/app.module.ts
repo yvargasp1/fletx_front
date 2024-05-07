@@ -21,7 +21,7 @@ import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import es from '@angular/common/locales/es'
 import {provideStorage, getStorage} from '@angular/fire/storage'
-import { registerLocaleData , DatePipe} from '@angular/common';
+import { registerLocaleData ,HashLocationStrategy, DatePipe, LocationStrategy} from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SliderModule } from 'primeng/slider';
@@ -51,11 +51,18 @@ registerLocaleData(es)
     SliderModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
-    provideStorage(()=>getStorage())
+    provideStorage(() => getStorage()),
   ],
-  providers: [CategoryService, MessageService , DatePipe,{
-    provide : LOCALE_ID, useValue: 'es'
-  }],
+  providers: [
+    CategoryService,
+    MessageService,
+    DatePipe,
+    {
+      provide: LOCALE_ID,
+      useValue: 'es',
+    },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
