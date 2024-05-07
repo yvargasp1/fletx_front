@@ -1,5 +1,5 @@
 export class Product {
-  id!: number;
+  id!: any;
   date_created!: Date;
   name!: string;
   category_id!: any;

@@ -13,7 +13,7 @@
         <div class="text-lg font-sans font-bold leading-normal text-zinc-950">
           Filtros
         </div>
-        <div
+        <div (click)="deleteFilters()"
           class="cursor-pointer rounded-lg border-[2px] border-red-500 p-4 items-center inline-flex gap-4"
         >
           <svg
@@ -108,11 +108,11 @@
         
         <div>
           
-    {{rangeValues[0]}}
+    $ {{rangeValues[0] | number : "1.2-2"}}
         </div>
           <div>
           
-    {{rangeValues[1]}}
+    $ {{rangeValues[1] | number : "1.2-2"}}
         </div>
 
       </div>
@@ -126,7 +126,7 @@
         <div class="grid w-[100%]">
           <div>
             <div class="flex justify-end items-start">
-              <div
+              <div (click)="onEdit(item)"
                 class="cursor-pointer p-2 bg-zinc-100 border border-zinc-100 rounded-lg"
               >
                 <svg
@@ -292,4 +292,4 @@
   <div></div>
 </div>
 
-<p-toast key="product" />
+<p-toast [style]="{padding:'10px'}" key="product"  [breakpoints]="{'1024px':{width:'100%',right:0,left:'0'}}" />

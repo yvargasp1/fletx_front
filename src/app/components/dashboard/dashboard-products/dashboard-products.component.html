@@ -1,8 +1,8 @@
 <div class="grid grid-cols-1">
   <div
-    class="lg:w-full py-[10px] px-[5%] bg-blue-950 justify-between items-center gap-[16px] inline-flex"
+    class="lg:w-full  py-[10px] px-[5%] bg-blue-950 justify-between items-center gap-[16px] grid-cols-1 grid lg:inline-flex"
   >
-    <div class="inline-flex items-center gap-4">
+    <div class="sm:justify-end md:justify-end inline-flex items-center gap-4">
       <svg
         width="16"
         height="16"
@@ -44,7 +44,7 @@
         3155503500
       </div>
     </div>
-    <div class="inline-flex items-center gap-4">
+    <div class="sm:justify-end md:justify-end inline-flex  items-center gap-4">
       <div
         class="cursor-pointer rounded-lg border-white p-4 border-[2px] flex-col items-center inline-flex"
       >
@@ -94,7 +94,7 @@
     </div>
   </div>
 
-  <div class="inline-flex justify-between items-center py-[10px] px-[5%]">
+  <div class="grid grid-cols-1 gap-4 lg:inline-flex justify-between items-center py-[10px] px-[5%]">
     <div class="inline-flex items-center gap-4">
       <svg
         width="32"
@@ -128,10 +128,13 @@
         />
       </svg>
     </div>
-    <div class="w-[182.286px]">
-      <img src="/assets/logo.png" />
+    <div class="flex sm:justify-center md:justify-center">
+      <div class="w-[182.286px]">
+        <img src="/assets/logo.png" />
+      </div>
+
     </div>
-    <div class="inline-flex items-center gap-4">
+    <div class="sm:justify-end md:justify-end inline-flex items-center gap-4">
       <div
         (click)="onCart()"
         class="cursor-pointer rounded-lg bg-red-500 p-4 items-center inline-flex gap-4"
@@ -224,7 +227,14 @@
     </div>
   </div>
   <img class="object-fill w-[100%]" src="/assets/logo-commercial.png" />
-  <app-list-products [empty]="empty" [add]="add" (eventoAdd)="onChangeAdd($event)" (eventoE)="onChangeEmpty($event)" (event)="listCarts($event)"></app-list-products>
+  <app-list-products
+    [empty]="empty"
+    [add]="add"
+    (eventoAdd)="onChangeAdd($event)"
+    (eventoE)="onChangeEmpty($event)"
+    (event)="listCarts($event)"
+    (eventEdit)="onEditProduct($event)"
+  ></app-list-products>
 </div>
 <p-sidebar [showCloseIcon]="false" [(visible)]="sidebarVisible">
   <ng-template pTemplate="header">
@@ -271,6 +281,16 @@
           class="italic text-xs font-sans font-medium leading-normal text-zinc-950"
         >
           Crear producto
+        </div>
+      </div>
+      <div
+        (click)="onSales()"
+        class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] flex-col items-center inline-flex"
+      >
+        <div
+          class="italic text-xs font-sans font-medium leading-normal text-zinc-950"
+        >
+          Ventas
         </div>
       </div>
     </div>
@@ -710,14 +730,14 @@
         class="lg:inline-flex justify-end gap-4 items-center grid grid-cols-1"
       >
         <div
-          (click)="onSaveProduct()"
+          (click)="editProduct ? onSaveEditProduct() : onSaveProduct()"
           *ngIf="formProduct.valid"
           class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] flex-col items-center inline-flex"
         >
           <div
             class="italic text-xs font-sans font-medium leading-normal text-zinc-950"
           >
-            Crear producto
+            {{ editProduct ? "Editar producto" : "Crear producto" }}
           </div>
         </div>
         <div
@@ -727,11 +747,11 @@
           <div
             class="italic text-xs font-sans font-medium leading-normal text-zinc-400"
           >
-            Crear producto
+            {{ editProduct ? "Editar producto" : "Crear producto" }}
           </div>
         </div>
         <div
-          (click)="onProduct()"
+          (click)="editProduct ? onEditCancel() : onProduct()"
           class="cursor-pointer rounded-lg border-red-500 p-4 border-[2px] flex-col items-center inline-flex"
         >
           <div
@@ -777,7 +797,15 @@
           <div class="grid w-[100%]">
             <div>
               <div class="flex justify-center">
-                <img [src]="item.image? item.image  : 'https://firebasestorage.googleapis.com/v0/b/fletx-14c0b.appspot.com/o/images%2Fnotfound.png?alt=media&token=99361d6c-6c1f-4e9f-8dd9-30f02a2fa4ca'" alt="" class="h-[165px] rounded-lg" />
+                <img
+                  [src]="
+                    item.image
+                      ? item.image
+                      : 'https://firebasestorage.googleapis.com/v0/b/fletx-14c0b.appspot.com/o/images%2Fnotfound.png?alt=media&token=99361d6c-6c1f-4e9f-8dd9-30f02a2fa4ca'
+                  "
+                  alt=""
+                  class="h-[165px] rounded-lg"
+                />
               </div>
             </div>
           </div>
@@ -830,7 +858,8 @@
       <div
         class="lg:inline-flex justify-end gap-4 items-center grid grid-cols-1"
       >
-        <div (click)="saleProducts()"
+        <div
+          (click)="onSaleProducts()"
           *ngIf="listCart.length"
           class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] flex-col items-center inline-flex"
         >
@@ -850,7 +879,8 @@
             Comprar
           </div>
         </div>
-        <div (click)="onEmptyCart()"
+        <div
+          (click)="onEmptyCart()"
           *ngIf="listCart.length"
           class="cursor-pointer rounded-lg border-red-500 p-4 border-[2px] flex-col items-center inline-flex"
         >
@@ -864,43 +894,75 @@
     </div>
   </ng-template>
 </p-sidebar>
-<p-dialog 
-    header="Header" 
-    [(visible)]="visibleDialog" 
-    [modal]="true" 
-    [style]="{ width: '25rem' }">
-
-    <ng-template pTemplate="header">
-<div class="flex flex-col gap-4">
-             <div
-            class="italic text-lg text-center font-sans font-medium leading-normal text-zinc-950"
-          >
-           Confirma la compra
-          </div>
-
-          </div>
-    </ng-template>
-        <ng-template pTemplate="content">
-          
-        </ng-template>
-            <ng-template pTemplate="footer">
-  <div class="grid">
-      <div
-        class="lg:inline-flex justify-center gap-4 items-center grid grid-cols-1"
+<p-sidebar [(visible)]="visibleSales" [showCloseIcon]="false">
+  <ng-template pTemplate="header">
+    <div class="inline-flex items-center gap-4">
+      <svg
+        (click)="onSales()"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6 cursor-pointer"
       >
-        <div (click)="onSaleProducts()"
-          *ngIf="listCart.length"
-          class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] flex-col items-center inline-flex"
-        >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+        />
+      </svg>
+
+      <div class="text-lg font-sans font-bold leading-normal text-zinc-950">
+        Ventas
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="flex flex-col gap-4">
+      <ng-container *ngFor="let item of listSale">
+        <div class="p-4 border-2 rounded-lg grid grid-cols-1 gap-4">
           <div
-            class="italic text-xs font-sans font-medium leading-normal text-zinc-950"
+            class="text-base text-center font-sans font-medium leading-normal text-zinc-950"
           >
-            Comprar
+            Producto
+          </div>
+          <div
+            class="text-base text-center font-sans font-normal leading-normal text-zinc-950"
+          >
+            Nombre: {{ item.product.name }}
+          </div>
+            <div
+            class="text-base text-center font-sans font-normal leading-normal text-zinc-950"
+          >
+            Fecha: {{ datePipe.transform(item.date_sale,"MM/dd/yyyy") }}
+          </div>
+          <div
+            class="text-base text-center font-sans font-normal leading-normal text-zinc-950"
+          >
+            Precio: $ {{ item.price | number : "1.2-2"}}
+          </div>
+          <div
+            class="text-base text-center font-sans font-normal leading-normal text-zinc-950"
+          >
+            Cantidad: {{ item.amount }}
+          </div>
+          <div
+            class="text-base text-center font-sans font-normal leading-normal text-zinc-950"
+          >
+            Total: $ {{ item.total | number : "1.2-2" }}
           </div>
         </div>
-        
-        <div (click)="cancelSale()"
-          *ngIf="listCart.length"
+      </ng-container>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div class="grid">
+      <div
+        class="lg:inline-flex justify-end gap-4 items-center grid grid-cols-1"
+      >
+        <div
+          (click)="onSales()"
           class="cursor-pointer rounded-lg border-red-500 p-4 border-[2px] flex-col items-center inline-flex"
         >
           <div
@@ -911,7 +973,8 @@
         </div>
       </div>
     </div>
-            </ng-template>
+  </ng-template>
+</p-sidebar>
 
-</p-dialog>
-<p-toast key="dash" />
+<p-toast  [style]="{padding:'10px'}"  key="dash" [breakpoints]="{'1024px':{width:'100%',right:0,left:'0'}}" />
+<p-toast  [style]="{padding:'10px'}"  key="load"  [breakpoints]="{'1024px':{width:'100%',right:0,left:'0'}}"  />

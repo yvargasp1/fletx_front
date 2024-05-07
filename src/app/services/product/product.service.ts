@@ -13,6 +13,9 @@ export class ProductService {
   public saveProduct(data: Product) {
     return this.http.post<Product>(`${this.URL}/products`, data);
   }
+  public editProduct(id:any ,data: Product) {
+    return this.http.patch<Product>(`${this.URL}/products/${id}`, data);
+  }
 
   public getProducts(
     sort: string | null,

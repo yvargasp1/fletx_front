@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, output } from '@angular/core';
 import { CategoryService } from '../../../../services/category/category.service';
 import { ProductService } from '../../../../services/product/product.service';
 import { Product } from '../../../../models/Product.dto';
@@ -29,18 +29,20 @@ export class ListProductsComponent implements OnInit {
   eventoE = new EventEmitter<any>();
   @Output()
   eventoAdd = new EventEmitter<any>();
+  @Output()
+  eventEdit = new EventEmitter<any>();
   minPrice = Infinity;
   maxPrice = -Infinity;
   listOrder: any[] = [
     {
       name: 'Más reciente',
       value: 'id',
-      order: 'ASC',
+      order: 'DESC',
     },
     {
       name: 'Más antiguo',
       value: 'id',
-      order: 'DESC',
+      order: 'ASC',
     },
     {
       name: 'Menor precio',
@@ -76,6 +78,10 @@ export class ListProductsComponent implements OnInit {
     console.log('Add', this.add);
     if (this.add) {
       this.ngOnInit();
+      this.selectOrder = {
+        value: 'id',
+        order: 'ASC',
+      };
       this.eventoAdd.emit(false);
     }
   }
@@ -108,7 +114,13 @@ export class ListProductsComponent implements OnInit {
         },
       });
   }
-
+  deleteFilters(){
+    this.ngOnInit();
+    this.selectOrder  = {
+    value: 'id',
+    order: 'ASC',
+  };
+  }
   ngOnInit(): void {
     this.categoryService.getAll().subscribe({
       next: (value) => {
@@ -121,7 +133,7 @@ export class ListProductsComponent implements OnInit {
         console.log(err);
       },
     });
-    this.productService.getProducts('id', null, 'ASC').subscribe({
+    this.productService.getProducts('id', null, 'DESC').subscribe({
       next: (value) => {
         this.listProducts = value;
         this.listProducts.forEach((item) => {
@@ -183,5 +195,8 @@ export class ListProductsComponent implements OnInit {
       this.event.emit(this.listProductsCart);
       this.eventoE.emit(false);
     }
+  }
+  onEdit(item: any) {
+    this.eventEdit.emit(item);
   }
 }
