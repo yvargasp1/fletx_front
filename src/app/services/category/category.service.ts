@@ -10,15 +10,16 @@ import { Category } from '../../models/Category.dto';
 export class CategoryService {
   private URL = environment.api;
 
-  constructor(private http :HttpClient){
+  constructor(private http: HttpClient) {}
 
+  public getAll() {
+    return this.http.get<any>(`${this.URL}/categories`);
   }
 
-  public getAll(){
-    return this.http.get<any>(`${this.URL}/categories`)
+  public saveCategory(data: Category) {
+    return this.http.post<Category>(`${this.URL}/categories`, data);
   }
-
-  public saveCategory(data:Category){
-    return this.http.post<Category>(`${this.URL}/categories`,data);
+  public deleteCategory(id: any) {
+    return this.http.delete<any>(`${this.URL}/categories/${id}`);
   }
 }

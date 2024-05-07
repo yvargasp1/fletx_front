@@ -199,10 +199,10 @@ export class ListProductsComponent implements OnInit {
   onEdit(item: any) {
     this.eventEdit.emit(item);
   }
-  onDeleteProduct(id:number){
+  onDeleteProduct(id: number) {
     this.productService.deleteProduct(id).subscribe({
-      next :(value:any)=> {
-        console.log(value)
+      next: (value: any) => {
+        console.log(value);
         if ((value.status = 302 && value.response)) {
           this.messageService.add({
             severity: 'info',
@@ -221,15 +221,48 @@ export class ListProductsComponent implements OnInit {
           this.ngOnInit();
         }
       },
-      error:(err)=> {
-        console.log(err)
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Producto',
-            key: 'product',
-            detail: `Eliminado`,
-          });
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Producto',
+          key: 'product',
+          detail: `Eliminado`,
+        });
       },
-    })
+    });
+  }
+  onDeleteCategory(id:number){
+    this.categoryService.deleteCategory(id).subscribe({
+      next: (value: any) => {
+        console.log(value);
+        if ((value.status = 302 && value.response)) {
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Categoría',
+            key: 'product',
+            detail: `Esta relacionada a un producto.`,
+          });
+        }
+        if (value.affected) {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Categoría',
+            key: 'product',
+            detail: `Eliminada`,
+          });
+          this.ngOnInit();
+        }
+      },
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Categoría',
+          key: 'product',
+          detail: `Eliminada`,
+        });
+      },
+    });
   }
 }

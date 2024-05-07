@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  api: 'http://localhost:3000',
+  api: 'https://fletx-back.onrender.com',
   // Your web app's Firebase configuration
   firebaseConfig: {
     apiKey: 'AIzaSyDjuQnAlT300zV0MlMAlHDMfXQ65a3Q2xE',
