@@ -1,5 +1,6 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,10 +14,31 @@ p-dropdown {
   border-radius: 6px;
 }
 
+p-checkbox{
+  border-width: 2px;
+  box-shadow: none !important;
+
+  border-radius: 6px;
+
+}
+.p-checkbox{
+  box-shadow: none !important;
+
+}
+.p-checkbox-box{
+  box-shadow: none !important;
+
+}
 p-dropdown .p-dropdown.p-component.p-inputwrapper {
   box-shadow: none !important;
   display: flex;
   width: 100%;
+}
+
+
+input#horizontal {
+border-width: 0 !important;
+text-align: center;
 }
 
 p-calendar span {
@@ -29,6 +51,9 @@ input.p-inputtext.p-component.p-element {
 }
 @media (min-width: 1024px) {
   .p-sidebar-left {
+    width: 40%;
+  }
+   .p-sidebar-right {
     width: 40%;
   }
 }
@@ -44,6 +69,18 @@ p-inputnumber {
   padding: 0;
   width: 100%;
 }
+p-inputnumber#addProduct {
+  border-width: 2px;
+  border-radius: 6px;
+  height: 50px;
+
+}
+#emptyCart{
+  display: grid;
+}
+
+
+
 .p-datepicker-title {
   display: flex;
   gap: 4px;

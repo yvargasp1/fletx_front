@@ -9,4 +9,5 @@ export class Product {
   stock!: number;
   file!: any;
   image!: string;
+  amount:number = 0
 }

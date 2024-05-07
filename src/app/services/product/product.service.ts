@@ -16,23 +16,20 @@ export class ProductService {
 
   public getProducts(
     sort: string | null,
-    lte: number | null,
-    gte: number | null,
-    category: number | null
+    category: any | null,
+    order: any | null
   ) {
     let params = new HttpParams();
 
     if (sort) {
       params = params.set('sort', sort);
     }
-    if (lte) {
-      params = params.set('lte', lte);
-    }
-    if (gte) {
-      params = params.set('gte', gte);
-    }
+
     if (category) {
       params = params.set('category', category);
+    }
+    if (order) {
+      params = params.set('order', order);
     }
     return this.http.get<any>(`${this.URL}/products`, { params });
   }

@@ -133,6 +133,7 @@
     </div>
     <div class="inline-flex items-center gap-4">
       <div
+        (click)="onCart()"
         class="cursor-pointer rounded-lg bg-red-500 p-4 items-center inline-flex gap-4"
       >
         <svg
@@ -187,7 +188,7 @@
         <div
           class="italic text-xs font-sans font-medium leading-normal text-zinc-100"
         >
-          $100000000
+          $ {{ totalSale | number : "1.2-2" }}
         </div>
       </div>
       <svg
@@ -223,7 +224,7 @@
     </div>
   </div>
   <img class="object-fill w-[100%]" src="/assets/logo-commercial.png" />
-  <app-list-products></app-list-products>
+  <app-list-products [empty]="empty" [add]="add" (eventoAdd)="onChangeAdd($event)" (eventoE)="onChangeEmpty($event)" (event)="listCarts($event)"></app-list-products>
 </div>
 <p-sidebar [showCloseIcon]="false" [(visible)]="sidebarVisible">
   <ng-template pTemplate="header">
@@ -276,7 +277,7 @@
   </ng-template>
 </p-sidebar>
 
-<p-sidebar [visible]="formVisibleCategory" [showCloseIcon]="false">
+<p-sidebar [(visible)]="formVisibleCategory" [showCloseIcon]="false">
   <ng-template pTemplate="header">
     <div class="inline-flex items-center gap-4">
       <svg
@@ -384,7 +385,7 @@
     </div>
   </ng-template>
 </p-sidebar>
-<p-sidebar [visible]="formVisibleProduct" [showCloseIcon]="false">
+<p-sidebar [(visible)]="formVisibleProduct" [showCloseIcon]="false">
   <ng-template pTemplate="header">
     <div class="inline-flex items-center gap-4">
       <svg
@@ -617,88 +618,88 @@
           </div>
         </div>
         <div *ngIf="formProduct.get('file')?.value" class="flex flex-col gap-2">
-           <label class="text-zinc-500 font-sans" for="category_id"
-            >Imagen</label>
-            <div
-             
-              class="rounded-lg border-zinc-950 p-4 border-[2px] inline-flex items-center justify-center gap-2"
+          <label class="text-zinc-500 font-sans" for="category_id"
+            >Imagen</label
+          >
+          <div
+            class="rounded-lg border-zinc-950 p-4 border-[2px] inline-flex items-center justify-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+              />
+            </svg>
+
+            <label class="text-zinc-500 font-sans" for="file">{{
+              file.name
+            }}</label>
+            <svg
+              class="cursor-pointer"
+              (click)="onDeleteFile()"
+              width="17"
+              height="17"
+              viewBox="0 0 17 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_183_167)">
                 <path
+                  d="M3.51104 4.85266H13.7886"
+                  stroke="#FF3C3A"
+                  stroke-width="1.5"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
                 />
-              </svg>
-    
-              <label class="text-zinc-500 font-sans" for="file">{{
-                file.name
-              }}</label>
-              <svg class="cursor-pointer"
-               (click) ="onDeleteFile()"
-                width="17"
-                height="17"
-                viewBox="0 0 17 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g clip-path="url(#clip0_183_167)">
-                  <path
-                    d="M3.51104 4.85266H13.7886"
-                    stroke="#FF3C3A"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                <path
+                  d="M7.36514 7.55853V11.6174"
+                  stroke="#FF3C3A"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9.93454 7.55853V11.6174"
+                  stroke="#FF3C3A"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M4.15339 4.85266L4.79574 12.9703C4.79574 13.3291 4.93109 13.6733 5.17202 13.927C5.41295 14.1807 5.73972 14.3232 6.08044 14.3232H11.2192C11.56 14.3232 11.8867 14.1807 12.1277 13.927C12.3686 13.6733 12.5039 13.3291 12.5039 12.9703L13.1463 4.85266"
+                  stroke="#FF3C3A"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6.72279 4.85267V2.82326C6.72279 2.64385 6.79047 2.47179 6.91093 2.34492C7.0314 2.21806 7.19478 2.14679 7.36514 2.14679H9.93454C10.1049 2.14679 10.2683 2.21806 10.3888 2.34492C10.5092 2.47179 10.5769 2.64385 10.5769 2.82326V4.85267"
+                  stroke="#FF3C3A"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_183_167">
+                  <rect
+                    width="15.4164"
+                    height="16.2353"
+                    fill="white"
+                    transform="translate(0.941641 0.117371)"
                   />
-                  <path
-                    d="M7.36514 7.55853V11.6174"
-                    stroke="#FF3C3A"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M9.93454 7.55853V11.6174"
-                    stroke="#FF3C3A"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M4.15339 4.85266L4.79574 12.9703C4.79574 13.3291 4.93109 13.6733 5.17202 13.927C5.41295 14.1807 5.73972 14.3232 6.08044 14.3232H11.2192C11.56 14.3232 11.8867 14.1807 12.1277 13.927C12.3686 13.6733 12.5039 13.3291 12.5039 12.9703L13.1463 4.85266"
-                    stroke="#FF3C3A"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M6.72279 4.85267V2.82326C6.72279 2.64385 6.79047 2.47179 6.91093 2.34492C7.0314 2.21806 7.19478 2.14679 7.36514 2.14679H9.93454C10.1049 2.14679 10.2683 2.21806 10.3888 2.34492C10.5092 2.47179 10.5769 2.64385 10.5769 2.82326V4.85267"
-                    stroke="#FF3C3A"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_183_167">
-                    <rect
-                      width="15.4164"
-                      height="16.2353"
-                      fill="white"
-                      transform="translate(0.941641 0.117371)"
-                    />
-                  </clipPath>
-                </defs>
-              </svg>
-            </div>
-
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
         </div>
       </div>
     </form>
@@ -708,7 +709,8 @@
       <div
         class="lg:inline-flex justify-end gap-4 items-center grid grid-cols-1"
       >
-        <div (click)="onSaveProduct()"
+        <div
+          (click)="onSaveProduct()"
           *ngIf="formProduct.valid"
           class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] flex-col items-center inline-flex"
         >
@@ -728,7 +730,8 @@
             Crear producto
           </div>
         </div>
-        <div (click)="onProduct()"
+        <div
+          (click)="onProduct()"
           class="cursor-pointer rounded-lg border-red-500 p-4 border-[2px] flex-col items-center inline-flex"
         >
           <div
@@ -741,5 +744,174 @@
     </div>
   </ng-template>
 </p-sidebar>
+<p-sidebar [(visible)]="visibleCart" position="right" [showCloseIcon]="false">
+  <ng-template pTemplate="header">
+    <div class="inline-flex items-center gap-4">
+      <svg
+        (click)="onCart()"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6 cursor-pointer"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+        />
+      </svg>
 
-<p-toast />
+      <div class="text-lg font-sans font-bold leading-normal text-zinc-950">
+        Carrito de compras
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div *ngIf="listCart.length" class="flex flex-col gap-4">
+      <ng-container *ngFor="let item of listCart">
+        <div
+          class="grid lg:grid-cols-3 grid-cols-1 gap-4 rounded-lg border-2 p-4"
+        >
+          <div class="grid w-[100%]">
+            <div>
+              <div class="flex justify-center">
+                <img [src]="item.image? item.image  : 'https://firebasestorage.googleapis.com/v0/b/fletx-14c0b.appspot.com/o/images%2Fnotfound.png?alt=media&token=99361d6c-6c1f-4e9f-8dd9-30f02a2fa4ca'" alt="" class="h-[165px] rounded-lg" />
+              </div>
+            </div>
+          </div>
+          <div class="justify-center flex">
+            <div class="flex flex-col gap-2">
+              <div
+                class="text-xl font-extrabold font-sans italic text-zinc-950"
+              >
+                {{ item.name }}
+              </div>
+              <div class="text-lg font-normal font-sans text-zinc-950">
+                Cantidad disponible: {{ item.stock }}
+              </div>
+              <div class="text-base font-normal font-sans text-zinc-950">
+                {{ item.value }}
+              </div>
+              <div class="text-xl font-extrabold font-sans text-red-500">
+                $ {{ item.price | number : "1.2-2" }}
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <p-inputNumber
+              [(ngModel)]="item.amount"
+              (click)="viewChangeCart(item)"
+              id="addProduct"
+              [showButtons]="true"
+              buttonLayout="horizontal"
+              inputId="horizontal"
+              spinnerMode="horizontal"
+              [min]="1"
+              [max]="item.stock"
+              decrementButtonClass="p-button-danger"
+              incrementButtonClass="p-button-success"
+              incrementButtonIcon="pi pi-plus"
+              [decrementButtonIcon]="
+                item.amount == 1 ? 'pi pi-trash' : 'pi pi-minus'
+              "
+            />
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div *ngIf="!listCart.length" class="p-4 flex items-center justify-center">
+      <i class="pi pi-cart-minus" style="font-size: 5rem"></i>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div class="grid">
+      <div
+        class="lg:inline-flex justify-end gap-4 items-center grid grid-cols-1"
+      >
+        <div (click)="saleProducts()"
+          *ngIf="listCart.length"
+          class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] flex-col items-center inline-flex"
+        >
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-zinc-950"
+          >
+            Comprar
+          </div>
+        </div>
+        <div
+          *ngIf="!listCart.length"
+          class="rounded-lg border-zinc-300 bg-zinc-300 p-4 border-[2px] flex-col items-center inline-flex"
+        >
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-zinc-400"
+          >
+            Comprar
+          </div>
+        </div>
+        <div (click)="onEmptyCart()"
+          *ngIf="listCart.length"
+          class="cursor-pointer rounded-lg border-red-500 p-4 border-[2px] flex-col items-center inline-flex"
+        >
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-red-500"
+          >
+            Vaciar
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-sidebar>
+<p-dialog 
+    header="Header" 
+    [(visible)]="visibleDialog" 
+    [modal]="true" 
+    [style]="{ width: '25rem' }">
+
+    <ng-template pTemplate="header">
+<div class="flex flex-col gap-4">
+             <div
+            class="italic text-lg text-center font-sans font-medium leading-normal text-zinc-950"
+          >
+           Confirma la compra
+          </div>
+
+          </div>
+    </ng-template>
+        <ng-template pTemplate="content">
+          
+        </ng-template>
+            <ng-template pTemplate="footer">
+  <div class="grid">
+      <div
+        class="lg:inline-flex justify-center gap-4 items-center grid grid-cols-1"
+      >
+        <div (click)="onSaleProducts()"
+          *ngIf="listCart.length"
+          class="cursor-pointer rounded-lg border-zinc-950 p-4 border-[2px] flex-col items-center inline-flex"
+        >
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-zinc-950"
+          >
+            Comprar
+          </div>
+        </div>
+        
+        <div (click)="cancelSale()"
+          *ngIf="listCart.length"
+          class="cursor-pointer rounded-lg border-red-500 p-4 border-[2px] flex-col items-center inline-flex"
+        >
+          <div
+            class="italic text-xs font-sans font-medium leading-normal text-red-500"
+          >
+            Cancelar
+          </div>
+        </div>
+      </div>
+    </div>
+            </ng-template>
+
+</p-dialog>
+<p-toast key="dash" />

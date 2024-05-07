@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -18,7 +18,15 @@ import { CalendarModule } from 'primeng/calendar';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore  } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { FormsModule } from '@angular/forms';
+import es from '@angular/common/locales/es'
 import {provideStorage, getStorage} from '@angular/fire/storage'
+import { registerLocaleData } from '@angular/common';
+import { DialogModule } from 'primeng/dialog';
+import { CheckboxModule } from 'primeng/checkbox';
+import { SliderModule } from 'primeng/slider';
+
+registerLocaleData(es)
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +34,7 @@ import {provideStorage, getStorage} from '@angular/fire/storage'
     DashboardProductsComponent,
   ],
   imports: [
+    CheckboxModule,
     DropdownModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -33,15 +42,20 @@ import {provideStorage, getStorage} from '@angular/fire/storage'
     HttpClientModule,
     AppRoutingModule,
     SidebarModule,
+    DialogModule,
     InputNumberModule,
+    FormsModule,
     InputTextModule,
     ToastModule,
     CalendarModule,
+    SliderModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideStorage(()=>getStorage())
   ],
-  providers: [CategoryService, MessageService],
+  providers: [CategoryService, MessageService , {
+    provide : LOCALE_ID, useValue: 'es'
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
